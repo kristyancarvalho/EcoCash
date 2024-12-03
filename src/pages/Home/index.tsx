@@ -86,6 +86,7 @@ const UserInfoContainer = styled.div``;
 const UserInfoHeader = styled.div`
   display: flex;
   align-items: center;
+  gap: 20px;
   font-family: 'Poppins', sans-serif;
 
   && img {
