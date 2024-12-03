@@ -34,7 +34,14 @@ function App() {
               </ProtectedRoute>
             } 
           />
-          <Route path="/trocar-materiais" element={<ExchangeMaterialsPage />} />
+          <Route 
+            path="/trocar-materiais" 
+            element={
+              <ProtectedRoute>
+                <ExchangeMaterialsPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<LoginRedirect />} />
           <Route path="/cadastro" element={<RegistrationPage />} />
           <Route path="/redefinir-senha" element={<ForgotPasswordPage />} />
