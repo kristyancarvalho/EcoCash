@@ -9,6 +9,7 @@ import LoginPage from "@/pages/Login";
 import RegistrationPage from "@/pages/SignUp";
 import ForgotPasswordPage from "@/pages/ForgotPassword";
 import ExchangeMaterialsPage from "./pages/ExchangeMaterials";
+import LeaderBoard from "@/pages/LeaderBoard";
 
 function LoginRedirect() {
   const { currentUser } = useAuth();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" element={<LoginRedirect />} />
           <Route path="/cadastro" element={<RegistrationPage />} />
           <Route path="/redefinir-senha" element={<ForgotPasswordPage />} />
+          <Route path="/leaderboard" element={<LeaderBoard />} />
         </Routes>
       </Router>
       </ThemeProvider>
