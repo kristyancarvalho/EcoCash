@@ -21,22 +21,22 @@ function LeaderBoard() {
                             <img src="icons/secondplace-icon.svg"/>
                             <LeaderInfoScoreContainer>
                                 <img src="icons/wallet-silver-icon.svg" />
-                                <LeaderInfoScoreTitle variant="h3" color="#ACACAC">138</LeaderInfoScoreTitle>
+                                <LeaderInfoScoreTitle variant="h3" color="#ACACAC">160</LeaderInfoScoreTitle>
                             </LeaderInfoScoreContainer>
                         </LeaderInfoBanner>
                         <LeaderInfoBanner>
-                            <LeaderInfoTitle variant="h3">Diogo</LeaderInfoTitle>
+                            <LeaderInfoTitle variant="h3">Miguel</LeaderInfoTitle>
                             <img src="icons/firstplace-icon.svg"/>
                             <LeaderInfoScoreContainer>
                                 <img src="icons/wallet-golden-icon.svg" />
-                                <LeaderInfoScoreTitle variant="h3" color="#FFD400">138</LeaderInfoScoreTitle>
+                                <LeaderInfoScoreTitle variant="h3" color="#FFD400">180</LeaderInfoScoreTitle>
                             </LeaderInfoScoreContainer>
                         </LeaderInfoBanner>
                         <LeaderInfoBanner>
-                            <LeaderInfoTitle variant="h3">Diogo</LeaderInfoTitle>
+                            <LeaderInfoTitle variant="h3">Bianca</LeaderInfoTitle>
                             <img src="icons/thirdplace-icon.svg"/><LeaderInfoScoreContainer>
                                 <img src="icons/wallet-bronze-icon.svg" />
-                                <LeaderInfoScoreTitle variant="h3" color="#FA9547">138</LeaderInfoScoreTitle>
+                                <LeaderInfoScoreTitle variant="h3" color="#FA9547">140</LeaderInfoScoreTitle>
                             </LeaderInfoScoreContainer>
                         </LeaderInfoBanner>
                     </LeaderInfoDetails>
