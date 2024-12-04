@@ -196,7 +196,7 @@ const ActionLinks = styled.div`
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 22px;
-  margin-top: 16px;
+  margin-top: 15px;
 `;
 
 export default LoginPage;
