@@ -9,6 +9,7 @@ import LoginPage from "@/pages/Login";
 import RegistrationPage from "@/pages/SignUp";
 import ForgotPasswordPage from "@/pages/ForgotPassword";
 import ExchangeMaterialsPage from "./pages/ExchangeMaterials";
+import VirtualWalletPage from "./pages/VirtualWallet";
 
 function LoginRedirect() {
   const { currentUser } = useAuth();
@@ -39,6 +40,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ExchangeMaterialsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route 
+            path="/carteira" 
+            element={
+              <ProtectedRoute>
+                <VirtualWalletPage />
               </ProtectedRoute>
             }
           />

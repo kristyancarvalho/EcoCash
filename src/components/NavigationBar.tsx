@@ -32,7 +32,7 @@ function NavigationBar() {
                 <Link to="/trocar-materiais">
                     <Icon src="icons/exchange-icon.svg"/>
                 </Link>
-                <Link to="/">
+                <Link to="/carteira">
                     <Icon src="icons/wallet-icon.svg"/>
                 </Link>
                 <Link to="/">
