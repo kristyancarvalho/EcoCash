@@ -196,8 +196,34 @@ const Title = styled.h1`
 const Input = styled(TextField)`
   && {
     width: 100%;
-    margin-top: 8px;
-    font-size: 30px;
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  & .MuiOutlinedInput-root {
+    height: 75px;
+    background: #F3F2F2;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  & .MuiOutlinedInput-input {
+    padding: 0;
+    color: #000;
+    font-size: 2rem;
+  }
+
+  & .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+
+  &:hover .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }a
+
+  &.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: none;
   }
 `;
 

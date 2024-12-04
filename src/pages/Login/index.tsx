@@ -144,8 +144,7 @@ const Title = styled.h1`
 const Input = styled(TextField)`
   && {
     width: 100%;
-    margin-top: 12px;
-    font-size: 32px;
+    font-size: 2rem;
     font-family: 'Poppins', sans-serif;
   }
   
@@ -160,6 +159,7 @@ const Input = styled(TextField)`
   & .MuiOutlinedInput-input {
     padding: 0;
     color: #000;
+    font-size: 2rem;
   }
 
   & .MuiOutlinedInput-notchedOutline {
@@ -168,7 +168,7 @@ const Input = styled(TextField)`
 
   &:hover .MuiOutlinedInput-notchedOutline {
     border: none;
-  }
+  }a
 
   &.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: none;
