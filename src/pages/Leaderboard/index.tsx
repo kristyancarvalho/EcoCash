@@ -44,13 +44,14 @@ function LeaderBoard() {
                             index === 0 ? '#FFD400' : 
                             '#FA9547'
                     }}>
-                        <LeaderInfoTitle variant="h3">{user.nome}</LeaderInfoTitle>
+                        <LeaderInfoTitle variant="h5">{user.nome}</LeaderInfoTitle>
                         <img 
                             src={
                                 index === 1 ? "icons/secondplace-icon.svg" : 
                                 index === 0 ? "icons/firstplace-icon.svg" : 
                                 "icons/thirdplace-icon.svg"
                             }
+                            id='leader-medal'
                         />
                         <LeaderInfoScoreContainer>
                             <img 
@@ -61,7 +62,7 @@ function LeaderBoard() {
                                 } 
                             />
                             <LeaderInfoScoreTitle 
-                                variant="h3" 
+                                variant="h5" 
                                 color={
                                     index === 1 ? "#ACACAC" : 
                                     index === 0 ? "#FFD400" : 
@@ -81,14 +82,14 @@ function LeaderBoard() {
         <>
             <NavigationBar />
             <Container>
-                <LeaderInfoContainer>
                     <LeaderInfoHeader>
                         <img src='icons/leaderboard-page-icon.svg' />
                         <div id='header-text'>
-                            <LeaderInfoHeaderTitle variant="h1">LeaderBoard</LeaderInfoHeaderTitle>
-                            <LeaderInfoHeaderSubtitle variant="h4">Descubra as 8 melhores colocações!</LeaderInfoHeaderSubtitle>
+                            <LeaderInfoHeaderTitle variant="h4">LeaderBoard</LeaderInfoHeaderTitle>
+                            <LeaderInfoHeaderSubtitle variant="h6">Descubra as 8 melhores colocações!</LeaderInfoHeaderSubtitle>
                         </div>
                     </LeaderInfoHeader>
+                <LeaderInfoContainer>
                     
                     {renderTopThree()}
                     
@@ -120,7 +121,7 @@ function LeaderBoard() {
 
 
 const Container = styled.div`
-    padding: 64px 32px;
+    padding: 128px 32px;
     width: 100vw;
     background-color: #f3f2f2;
     height: 100dvh;
@@ -128,7 +129,6 @@ const Container = styled.div`
 
 const LeaderInfoContainer = styled.div`
     display: flex;
-    flex-direction: column;
     height: auto;
     gap: 2em;
 `;
@@ -136,9 +136,10 @@ const LeaderInfoContainer = styled.div`
 const LeaderInfoHeader = styled.div`
     display: flex;
     align-items: center;
+    padding: 0 320px;
     margin: 0px 0px 1em  0px;
     && img {
-        width: 150px;
+        width: 40px;
         margin-bottom: -16px;
   }`;
 
@@ -165,6 +166,8 @@ const LeaderInfoDetails = styled.div`
     border-radius: 15px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
     padding: 25px;
+    gap: 20px;
+
     && img {
         background-color: transparent;
     }
@@ -176,8 +179,12 @@ const LeaderInfoBanner = styled.div`
     align-items: center;
     justify-content: space-evenly;
     padding: 5px 15px;
-    height: 464px;
-    width: 250px;
+    max-height: 100%;
+    width: 300px;
+
+    && #leader-medal {
+        width: 90px;
+    }
 `;
 
 const LeaderInfoTitle = styled(Typography)`
@@ -190,7 +197,11 @@ const LeaderInfoScoreContainer = styled.div`
     background-color: #FFF;
     border-radius: 15px;
     gap: 15px;
-    padding: 10px 20px;
+    padding: 8px;
+
+    && img {
+        width: 40px;
+    }
 `;
 
 const LeaderInfoScoreTitle = styled(Typography)``;
