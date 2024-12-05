@@ -56,10 +56,10 @@ function HomePage() {
           <UserInfoHeader>
             <img src="icons/user-icon.svg" alt="User Icon" />
             <div id='header-text'>
-              <UserInfoHeaderTitle variant="h1">
+              <UserInfoHeaderTitle variant="h4">
                 Área do Usuário
               </UserInfoHeaderTitle>
-              <UserInfoHeaderSubtitle variant="h4">
+              <UserInfoHeaderSubtitle variant="h6">
                 Suas informações estão aqui!
               </UserInfoHeaderSubtitle>
             </div>
@@ -103,7 +103,7 @@ function HomePage() {
 }
 
 const Container = styled.div`
-  padding: 64px 32px;
+  padding: 120px 320px 0 320px;
   height: 100vh;
   width: 100vw;
   background-color: #F3F2F2;
@@ -114,17 +114,17 @@ const UserInfoContainer = styled.div``;
 const UserInfoHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   font-family: 'Poppins', sans-serif;
 
   && img {
-    width: 150px;
-    margin-bottom: -32px;
+    width: 80px;
   }
 `;
 
 const UserInfoHeaderTitle = styled(Typography)`
   font-weight: bold;
+  overflow: hidden;
 `
 
 const UserInfoHeaderSubtitle = styled(Typography)`
@@ -136,10 +136,10 @@ const UserInfoDetails = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 128px 16px;
+  padding: 16px;
   background: #ffffff;
   border-radius: 8px;
-  margin-top: 128px;
+  margin-top: 16px;
   gap: 20px;
 
   && .inline-items {
@@ -150,7 +150,7 @@ const UserInfoDetails = styled.div`
 `;
 
 const UserinfoCell = styled.div`
-  font-size: 32px;
+  font-size: 16px;
   display: flex;
   width: 100%;
   flex-direction: column;

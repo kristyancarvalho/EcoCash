@@ -57,11 +57,12 @@ function NavigationBar() {
 const NavigationContainer = styled.div`
     width: 100vw;
     z-index: 5;
+    position: fixed;
     background: #1ADB72;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 32px;
+    padding: 8px 32px;
 
     && #action-button {
         margin-top: 20px;
@@ -69,16 +70,16 @@ const NavigationContainer = styled.div`
 `;
 
 const Logo = styled.img`
-    width: 170px;
+    width: 90px;
 `
 
 const Icon = styled.img`
-    width: 80px;
+    width: 48px;
 `
 
 const Links = styled.div`
     display: flex;
-    gap: 48px;
+    gap: 32px;
     margin-top: 20px;
 `
 
