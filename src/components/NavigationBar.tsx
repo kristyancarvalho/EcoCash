@@ -38,7 +38,7 @@ function NavigationBar() {
                 <Link to="/">
                     <Icon src="icons/leaderboard-icon.svg"/>
                 </Link>
-                <Link to="/">
+                <Link to="/score">
                     <Icon src="icons/search-icon.svg"/>
                 </Link>
             </Links>

@@ -11,6 +11,8 @@ import ForgotPasswordPage from "@/pages/ForgotPassword";
 import ExchangeMaterialsPage from "./pages/ExchangeMaterials";
 import VirtualWalletPage from "./pages/VirtualWallet";
 
+import ScorePage from "@/pages/Score"
+
 function LoginRedirect() {
   const { currentUser } = useAuth();
 
@@ -54,6 +56,8 @@ function App() {
           <Route path="/login" element={<LoginRedirect />} />
           <Route path="/cadastro" element={<RegistrationPage />} />
           <Route path="/redefinir-senha" element={<ForgotPasswordPage />} />
+
+          <Route path="/score" element={<ScorePage />} />
         </Routes>
       </Router>
       </ThemeProvider>
