@@ -68,8 +68,8 @@ function ExchangeMaterialsPage() {
         <InfoHeader>
           <img src="icons/exchange-page-icon.svg" alt="Exchange Page Icon" />
           <div id="header-text">
-            <InfoHeaderTitle variant="h1">Trocar Materiais</InfoHeaderTitle>
-            <InfoHeaderSubtitle variant="h4">
+            <InfoHeaderTitle>Trocar Materiais</InfoHeaderTitle>
+            <InfoHeaderSubtitle>
               Recicle itens para ganhar pontos!!
             </InfoHeaderSubtitle>
           </div>
@@ -78,7 +78,7 @@ function ExchangeMaterialsPage() {
         {!confirmedMaterial ? (
           <>
             <Card>
-              <CardTitle variant="h3">
+              <CardTitle>
                 Coloque o item na balança, e selecione o tipo de material.
               </CardTitle>
               <CardButtons>
@@ -112,35 +112,40 @@ function ExchangeMaterialsPage() {
         ) : (
           <>
             <ConfirmationCard>
-              <ConfirmationTitle variant="h3">
-                Você selecionou:
-              </ConfirmationTitle>
+              <InfoHeaderTitle variant="h5">
+                Selecionado:  
+              </InfoHeaderTitle>
               <ConfirmationHeader style={{ backgroundColor: confirmedMaterial.color }}>
                 {confirmedMaterial.type}
               </ConfirmationHeader>
               <ConfirmationBody>
                 <ConfirmationInfo>
-                  <ConfirmationTitle variant="h4">
+                  <ConfirmationTitle>
                     Peso do material
                   </ConfirmationTitle>
 
                   <ConfirmationMainInfo>
-                    {
-                      materialScores.find((m) => m.type === confirmedMaterial.type)?.weight
-                    }
+                    <span>
+                      {
+                        materialScores.find((m) => m.type === confirmedMaterial.type)?.weight
+                      }
+                      g
+                    </span>
                   </ConfirmationMainInfo>
                 </ConfirmationInfo>
 
                 <ConfirmationInfo>
-                  <ConfirmationTitle variant="h4">
+                  <ConfirmationTitle>
                     Pontos a adquirir:
                   </ConfirmationTitle>
 
                   <ConfirmationMainInfo>
-                    <img src="icons/points-icon.svg" alt="" />
-                    {
-                      materialScores.find((m) => m.type === confirmedMaterial.type)?.score
-                    }
+                    <span>
+                      <img src="icons/points-icon.svg" alt="" />
+                      {
+                        materialScores.find((m) => m.type === confirmedMaterial.type)?.score
+                      }
+                    </span>
                   </ConfirmationMainInfo>
                 </ConfirmationInfo>
 
@@ -173,17 +178,17 @@ function ExchangeMaterialsPage() {
               </RightSection>
             </ScoreCard>
           ))}
-        </ScoreCards>;
+        </ScoreCards>
       </Container>
     </>
   );
 }
 
 const Container = styled.div`
-  padding: 64px 32px;
+  padding: 120px 320px 0 320px;
   height: 100vh;
   width: 100vw;
-  background-color: #f3f2f2;
+  background-color: #F3F2F2;
 `;
 
 const InfoHeader = styled.div`
@@ -193,13 +198,13 @@ const InfoHeader = styled.div`
   font-family: "Poppins", sans-serif;
 
   && img {
-    width: 150px;
-    margin-bottom: -32px;
+    width: 80px;
   }
 `;
 
 const InfoHeaderTitle = styled(Typography)`
   font-weight: bold;
+  overflow: hidden;
 `;
 
 const InfoHeaderSubtitle = styled(Typography)`
@@ -208,10 +213,10 @@ const InfoHeaderSubtitle = styled(Typography)`
 `;
 
 const Card = styled.div`
-  margin-top: 64px;
+  margin-top: 32px;
   border-radius: 16px;
   width: 100%;
-  padding: 32px;
+  padding: 16px;
   background: #ffffff;
   text-align: center;
 `;
@@ -221,8 +226,8 @@ const CardTitle = styled(Typography)``;
 const CardButtons = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 64px;
-  margin-top: 64px;
+  grid-gap: 16px;
+  margin-top: 32px;
 `;
 
 const CardButton = styled(Button)`
@@ -235,7 +240,7 @@ const CardButton = styled(Button)`
     color: white;
 
     img {
-      width: 50px;
+      width: 32px;
     }
 
     &:disabled {
@@ -245,14 +250,13 @@ const CardButton = styled(Button)`
 `;
 
 const CardButtonTitle = styled.span`
-  font-size: 2rem;
+  font-size: 1rem;
 `;
 
 const ConfirmButton = styled(Button)`
   && {
-    margin-top: 64px;
+    margin-top: 32px;
     width: 100%;
-    height: 75px;
     background-color: #18dbb1;
     border-radius: 16px;
     display: flex;
@@ -264,12 +268,12 @@ const ConfirmButton = styled(Button)`
 `;
 
 const ConfirmButtonTitle = styled.span`
-  font-size: 2rem;
+  font-size: 1rem;
 `;
 
 const ConfirmationCard = styled.div`
-  margin-top: 64px;
-  padding: 32px;
+  margin-top: 28px;
+  padding: 16px 32px;
   background: #ffffff;
   border-radius: 16px;
   text-align: center;
@@ -281,40 +285,58 @@ const ConfirmationCard = styled.div`
 const ConfirmationHeader = styled.div`
   width: 60%;
   text-align: center;
-  padding: 16px;
+  padding: 8px;
   color: #ffffff;
-  font-size: 1.8rem;
+  font-size: 1rem;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
 `;
 
-const ConfirmationTitle = styled(Typography)``
+const ConfirmationTitle = styled.span`  
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+`
 
 const ConfirmationBody = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  `;
+`;
 
 const ConfirmationInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 48px;
+  margin-top: 16px;
+
+  && span {
+    font-size: 2rem;
+    
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 4px;
+  }
 `
+
 const ConfirmationMainInfo = styled.span`
   font-family: 'Poppins', sans-serif;
-  font-size: 6rem;
+  font-size: 1rem;
   font-weight: 500;
 
-  margin-top: 32px;
   display: flex;
   align-items: center;
   gap: 30px;
+
+  && img {
+    width: 32px;
+  }
 `
 
 const ConfirmationActions = styled.div`
-  margin-top: 64px;
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -323,7 +345,6 @@ const ConfirmationActions = styled.div`
 const BackButton = styled(Button)`
   && {
     width: 100%;
-    height: 75px;
     background-color: #ACACAC;
     border-radius: 16px;
     display: flex;
@@ -336,8 +357,7 @@ const BackButton = styled(Button)`
 
 const EarnPointsButton = styled(Button)`
   && {
-    width: 100%;
-    height: 75px;
+    width: 100%; 
     background-color: #18dbb1;
     border-radius: 16px;
     display: flex;
@@ -351,8 +371,8 @@ const EarnPointsButton = styled(Button)`
 const ScoreCards = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 64px;
-  gap: 16px;
+  margin-top: 16px;
+  gap: 28px;
   font-family: 'Poppins', sans-serif;
 `;
 
@@ -364,7 +384,7 @@ const ScoreCard = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   flex: 1;
-  height: 80px;
+  height: 60px;
 `;
 
 const LeftSection = styled.div<{ bgColor: string }>`
@@ -376,7 +396,7 @@ const LeftSection = styled.div<{ bgColor: string }>`
   height: 100%;
   width: 50%;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   && img {
     width: 30px;
@@ -390,7 +410,7 @@ const RightSection = styled.div`
   justify-content: center;
   width: 50%;
   color: #000;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 400;
 
   span:first-child {
