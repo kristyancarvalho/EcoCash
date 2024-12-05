@@ -1,35 +1,108 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavigationBar from '@/components/NavigationBar';
 import { Typography } from '@mui/material';
+import { collection,getDocs } from 'firebase/firestore';
+import { db } from '@/firebase/config';
+import { User } from '@/firebase/firestore';
 
-function ScorePage(){
+function ScorePage() {
+    const [users, setUsers] = useState<User[]>([]);
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterField, setFilterField] = useState('nome');
 
-    return(
-    <>
-        <NavigationBar/>
-        <Container>
-            <ScoreHeader>
-                <img src="icons/search-page-icon.svg" />
-                <div id='header-text'>
-                <ScoreHeaderTitle variant="h1">Consulta de Pontos</ScoreHeaderTitle>
-                <ScoreHeaderSubtitle variant="h4">Descubra a pontuação dos seus amigos!</ScoreHeaderSubtitle>
-                </div>
-            </ScoreHeader>
-            <ScoreSearchContainer>
-                    <ScoreSearchLabel>Filtrar por:
-                        <ScoreSearchSelect>
-                            
-                        </ScoreSearchSelect>
-                    </ScoreSearchLabel>
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const usersRef = collection(db, 'users');
+                const querySnapshot = await getDocs(usersRef);
+                
+                const fetchedUsers = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                } as User));
+
+                setUsers(fetchedUsers);
+                setFilteredUsers(fetchedUsers);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchUsers();
+    }, []);
+
+    const handleSearch = () => {
+        if (!searchTerm) {
+            setFilteredUsers(users);
+            return;
+        }
+
+        const filtered = users.filter(user => {
+            const fieldValue = user[filterField as keyof User]?.toString().toLowerCase() || '';
+            return fieldValue.includes(searchTerm.toLowerCase());
+        });
+
+        setFilteredUsers(filtered);
+    };
+
+    return (
+        <>
+            <NavigationBar/>
+            <Container>
+                <ScoreHeader>
+                    <img src="icons/search-page-icon.svg" />
+                    <div id='header-text'>
+                        <ScoreHeaderTitle variant="h1">Consulta de Pontos</ScoreHeaderTitle>
+                        <ScoreHeaderSubtitle variant="h4">Descubra a pontuação dos seus amigos!</ScoreHeaderSubtitle>
+                    </div>
+                </ScoreHeader>
+                <ScoreSearchContainer>
+                    <ScoreSearchSelect 
+                        value={filterField}
+                        onChange={(e) => setFilterField(e.target.value)}
+                    >
+                        <option value="ra">RA</option>
+                        <option value="nome">Nome</option>
+                        <option value="turma">Turma</option>
+                        <option value="pontosAtuais">Pontos</option>
+                    </ScoreSearchSelect>
                     <ScoreSearchInputContainer>
-                        <ScoreSearchInput type="text" placeholder="Pesquise aqui"/>
-                        <ScoreSearchButton>
+                        <ScoreSearchInput 
+                            type="text" 
+                            placeholder="Pesquise aqui"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <ScoreSearchButton onClick={handleSearch}>
                             <img src="icons/search-icon.svg" />
                         </ScoreSearchButton>
                     </ScoreSearchInputContainer>
                 </ScoreSearchContainer>
-        </Container>
-    </>
+
+                <LeaderInfoTable>
+                    <thead>
+                        <LeaderInfoTableRow>
+                            <LeaderInfoTableHeader>RA</LeaderInfoTableHeader>
+                            <LeaderInfoTableHeader>Nome</LeaderInfoTableHeader>
+                            <LeaderInfoTableHeader>Turma</LeaderInfoTableHeader>
+                            <LeaderInfoTableHeader>Pontos</LeaderInfoTableHeader>
+                        </LeaderInfoTableRow>
+                    </thead>
+                    <tbody>
+                        {filteredUsers.map((user) => (
+                            <LeaderInfoTableRow key={user.id}>
+                                <LeaderInfoTableData>{user.ra}</LeaderInfoTableData>
+                                <LeaderInfoTableData>{user.nome}</LeaderInfoTableData>
+                                <LeaderInfoTableData>{user.turma}</LeaderInfoTableData>
+                                <LeaderInfoTableData>{user.pontosAtuais}</LeaderInfoTableData>
+                            </LeaderInfoTableRow>
+                        ))}
+                    </tbody>
+                </LeaderInfoTable>
+            </Container>
+        </>
     )
 }
 
@@ -61,37 +134,78 @@ const ScoreHeaderSubtitle = styled(Typography)`
 `;
 
 const ScoreSearchContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 4em 0 2em 0;
 `;
 
-const ScoreSearchLabel = styled.label`
-    font-family: 'Poppins', sans-serif;  
+const ScoreSearchSelect = styled.select`
+    font-family: 'Poppins', sans-serif;
+    width: 30%;
+    height: 80px;
+    font-size: 22px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
 `;
-const ScoreSearchSelect = styled.select``;
+
+const ScoreSearchInputContainer = styled.div`
+    display: flex;
+    align-items: center;
+    width: 70%;
+    border-radius: 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    
+    && img {
+        width: 50px;
+    }
+`;
 
 const ScoreSearchInput = styled.input`  
     font-family: 'Poppins', sans-serif;  
     font-size: 30px;
-    height: 100%;
+    height: 80px;
+    width: 100%;
     padding: 10px 20px;
     border: none;
-`;
-
-const ScoreSearchInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  border-radius: 15px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
-  && img {
-    width: 50px;
-  }
+    border-radius: 15px 0 0 15px;
 `;
 
 const ScoreSearchButton = styled.button`
     background-color: #18DBB1;
     padding: 10px 20px;
+    height: 80px;
     border: none;
+    border-radius: 0 15px 15px 0;
+`;
+
+const LeaderInfoTable = styled.table`
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    width: 100%;
+    text-align: justify;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+`;
+
+const LeaderInfoTableHeader = styled.th`
+    background-color: #18DBB1;
+    padding: 10px;
+    font-weight: 200;
+    color: #FFF;
+`;
+
+const LeaderInfoTableRow = styled.tr`
+    width: 25%;
+    background-color: #FFF;
+`;
+
+const LeaderInfoTableData = styled.td`
+    width: 25%;
+    padding: 5px;
 `;
 
 export default ScorePage;
