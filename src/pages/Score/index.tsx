@@ -66,16 +66,18 @@ const ScoreSearchContainer = styled.div`
 `;
 
 const ScoreSearchLabel = styled.label`
-    font-family: font-family: 'Poppins', sans-serif;  
+    font-family: 'Poppins', sans-serif;  
 `;
 const ScoreSearchSelect = styled.select``;
+
 const ScoreSearchInput = styled.input`  
-    font-family: font-family: 'Poppins', sans-serif;  
+    font-family: 'Poppins', sans-serif;  
     font-size: 30px;
     height: 100%;
     padding: 10px 20px;
     border: none;
-  `;
+`;
+
 const ScoreSearchInputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -85,10 +87,11 @@ const ScoreSearchInputContainer = styled.div`
     width: 50px;
   }
 `;
+
 const ScoreSearchButton = styled.button`
     background-color: #18DBB1;
     padding: 10px 20px;
     border: none;
-    `;
+`;
 
 export default ScorePage;
