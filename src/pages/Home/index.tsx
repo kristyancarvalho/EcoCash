@@ -1,26 +1,52 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavigationBar from '@/components/NavigationBar';
 import { Typography } from '@mui/material';
-
-
-interface UserInfo {
-  ra: string;
-  name: string;
-  dataNascimento: string;
-  turma: string;
-  pontosAcumulados: number;
-  senha: string
-}
+import { getUserById } from '@/firebase/firestore';
+import { auth } from '@/firebase/config';
+import { Timestamp } from 'firebase/firestore';
 
 function HomePage() {
-  const userInfo: UserInfo = {
-    ra: '000109435761',
-    name: 'Miguel',
-    dataNascimento: '24/10/2006',
-    turma: '3D',
-    pontosAcumulados: 210,
-    senha: '******'
-  };
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+
+  interface UserInfo {
+    ra: string;
+    name: string;
+    dataNascimento: string;
+    turma: string;
+    pontosAcumulados: number;
+  }
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          const userData = await getUserById(currentUser.uid);
+          if (userData) {
+            const formattedDate = 
+              userData.dataNascimento instanceof Timestamp
+                ? userData.dataNascimento.toDate().toLocaleDateString('pt-BR')
+                : typeof userData.dataNascimento === 'string'
+                  ? userData.dataNascimento
+                  : (userData.dataNascimento as Date).toLocaleDateString('pt-BR');
+
+            setUserInfo({
+              ra: userData.ra,
+              name: userData.nome,
+              dataNascimento: formattedDate,
+              turma: userData.turma,
+              pontosAcumulados: userData.pontosAdquiridos
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <>
@@ -28,7 +54,7 @@ function HomePage() {
       <Container>
         <UserInfoContainer>
           <UserInfoHeader>
-            <img src="icons/user-icon.svg" />
+            <img src="icons/user-icon.svg" alt="User Icon" />
             <div id='header-text'>
               <UserInfoHeaderTitle variant="h1">
                 Área do Usuário
@@ -38,41 +64,43 @@ function HomePage() {
               </UserInfoHeaderSubtitle>
             </div>
           </UserInfoHeader>
-          <UserInfoDetails>
-            <UserinfoCell>
-              <UserInfoLabel>RA</UserInfoLabel>
-              <UserInfoValue>{userInfo.ra}</UserInfoValue>
-            </UserinfoCell>
-            <UserinfoCell>
-              <UserInfoLabel>Nome</UserInfoLabel>
-              <UserInfoValue>{userInfo.name}</UserInfoValue>
-            </UserinfoCell>
-            <div className='inline-items'>
+          {userInfo && (
+            <UserInfoDetails>
               <UserinfoCell>
-                <UserInfoLabel>Data de Nascimento</UserInfoLabel>
-                <UserInfoValue>{userInfo.dataNascimento}</UserInfoValue>
+                <UserInfoLabel>RA</UserInfoLabel>
+                <UserInfoValue>{userInfo.ra}</UserInfoValue>
               </UserinfoCell>
               <UserinfoCell>
-                <UserInfoLabel>Turma</UserInfoLabel>
-                <UserInfoValue>{userInfo.turma}</UserInfoValue>
+                <UserInfoLabel>Nome</UserInfoLabel>
+                <UserInfoValue>{userInfo.name}</UserInfoValue>
               </UserinfoCell>
-            </div>
-            <div className='inline-items'>
-              <UserinfoCell>
-                <UserInfoLabel>Senha</UserInfoLabel>
-                <UserInfoValue>{userInfo.senha}</UserInfoValue>
-              </UserinfoCell>
-              <UserinfoCell>
-                <UserInfoLabel>Pontos Acumulados</UserInfoLabel>
-                <UserInfoValue>{userInfo.pontosAcumulados}</UserInfoValue>
-              </UserinfoCell>
-            </div>
-          </UserInfoDetails>
+              <div className='inline-items'>
+                <UserinfoCell>
+                  <UserInfoLabel>Data de Nascimento</UserInfoLabel>
+                  <UserInfoValue>{userInfo.dataNascimento}</UserInfoValue>
+                </UserinfoCell>
+                <UserinfoCell>
+                  <UserInfoLabel>Turma</UserInfoLabel>
+                  <UserInfoValue>{userInfo.turma}</UserInfoValue>
+                </UserinfoCell>
+              </div>
+              <div className='inline-items'>
+                <UserinfoCell>
+                  <UserInfoLabel>Senha</UserInfoLabel>
+                  <UserInfoValue>******</UserInfoValue>
+                </UserinfoCell>
+                <UserinfoCell>
+                  <UserInfoLabel>Pontos Acumulados</UserInfoLabel>
+                  <UserInfoValue>{userInfo.pontosAcumulados}</UserInfoValue>
+                </UserinfoCell>
+              </div>
+            </UserInfoDetails>
+          )}
         </UserInfoContainer>
       </Container>
     </>
   );
-};
+}
 
 const Container = styled.div`
   padding: 64px 32px;
