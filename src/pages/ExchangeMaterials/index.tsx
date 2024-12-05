@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import NavigationBar from "@/components/NavigationBar";
 import { Button, Typography } from "@mui/material";
+import { getPeso } from "@/api/arduino";
 
 interface MaterialType {
   type: string;
@@ -12,6 +13,7 @@ interface MaterialType {
 function ExchangeMaterialsPage() {
   const [selectedMaterial, setSelectedMaterial] = useState<MaterialType | null>(null);
   const [confirmedMaterial, setConfirmedMaterial] = useState<MaterialType | null>(null);
+  const [pesoMaterial, setPesoMaterial] = useState(0);
 
   const materialTypes: MaterialType[] = [
     { type: "Papel", color: "#FFD400", icon: "icons/exchange-icon.svg" },
@@ -41,6 +43,15 @@ function ExchangeMaterialsPage() {
     setSelectedMaterial(null);
     setConfirmedMaterial(null);
   };
+
+  async function retornarPeso() {
+    let pesoAtual = await getPeso();
+    console.log(pesoAtual);
+    console.log(typeof pesoAtual);
+  }
+  useEffect(() => {
+    retornarPeso();
+  }, [])
 
   return (
     <>
