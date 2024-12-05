@@ -68,8 +68,8 @@ function ExchangeMaterialsPage() {
         <InfoHeader>
           <img src="icons/exchange-page-icon.svg" alt="Exchange Page Icon" />
           <div id="header-text">
-            <InfoHeaderTitle>Trocar Materiais</InfoHeaderTitle>
-            <InfoHeaderSubtitle>
+            <InfoHeaderTitle variant="h4">Trocar Materiais</InfoHeaderTitle>
+            <InfoHeaderSubtitle variant="h6">
               Recicle itens para ganhar pontos!!
             </InfoHeaderSubtitle>
           </div>
