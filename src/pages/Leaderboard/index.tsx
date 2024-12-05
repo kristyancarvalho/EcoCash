@@ -1,8 +1,82 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavigationBar from '@/components/NavigationBar';
 import { Typography } from '@mui/material';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { db } from '@/firebase/config';
+import { User } from '@/firebase/firestore';
 
 function LeaderBoard() {
+    const [topUsers, setTopUsers] = useState<User[]>([]);
+    const [topThreeUsers, setTopThreeUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        const fetchTopUsers = async () => {
+            try {
+                const usersRef = collection(db, 'users');
+                const q = query(usersRef, orderBy('pontosAtuais', 'desc'), limit(8));
+                
+                const querySnapshot = await getDocs(q);
+                const users = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                } as User));
+
+                setTopUsers(users.slice(3));
+                setTopThreeUsers(users.slice(0, 3));
+            } catch (error) {
+                console.error('Erro buscando usuários:', error);
+            }
+        };
+
+        fetchTopUsers();
+    }, []);
+
+    const renderTopThree = () => {
+        const sortedTopThree = [...topThreeUsers].sort((a, b) => b.pontosAtuais - a.pontosAtuais);
+        
+        return (
+            <LeaderInfoDetails>
+                {sortedTopThree.map((user, index) => (
+                    <LeaderInfoBanner key={user.id} style={{
+                        backgroundColor: 
+                            index === 1 ? '#ACACAC' : 
+                            index === 0 ? '#FFD400' : 
+                            '#FA9547'
+                    }}>
+                        <LeaderInfoTitle variant="h3">{user.nome}</LeaderInfoTitle>
+                        <img 
+                            src={
+                                index === 1 ? "icons/secondplace-icon.svg" : 
+                                index === 0 ? "icons/firstplace-icon.svg" : 
+                                "icons/thirdplace-icon.svg"
+                            }
+                        />
+                        <LeaderInfoScoreContainer>
+                            <img 
+                                src={
+                                    index === 1 ? "icons/wallet-silver-icon.svg" : 
+                                    index === 0 ? "icons/wallet-golden-icon.svg" : 
+                                    "icons/wallet-bronze-icon.svg"
+                                } 
+                            />
+                            <LeaderInfoScoreTitle 
+                                variant="h3" 
+                                color={
+                                    index === 1 ? "#ACACAC" : 
+                                    index === 0 ? "#FFD400" : 
+                                    "#FA9547"
+                                }
+                            >
+                                {user.pontosAtuais}
+                            </LeaderInfoScoreTitle>
+                        </LeaderInfoScoreContainer>
+                    </LeaderInfoBanner>
+                ))}
+            </LeaderInfoDetails>
+        );
+    };
+
     return (
         <>
             <NavigationBar />
@@ -15,74 +89,35 @@ function LeaderBoard() {
                             <LeaderInfoHeaderSubtitle variant="h4">Descubra as 8 melhores colocações!</LeaderInfoHeaderSubtitle>
                         </div>
                     </LeaderInfoHeader>
-                    <LeaderInfoDetails>
-                        <LeaderInfoBanner>
-                            <LeaderInfoTitle variant="h3">Diogo</LeaderInfoTitle>
-                            <img src="icons/secondplace-icon.svg"/>
-                            <LeaderInfoScoreContainer>
-                                <img src="icons/wallet-silver-icon.svg" />
-                                <LeaderInfoScoreTitle variant="h3" color="#ACACAC">160</LeaderInfoScoreTitle>
-                            </LeaderInfoScoreContainer>
-                        </LeaderInfoBanner>
-                        <LeaderInfoBanner>
-                            <LeaderInfoTitle variant="h3">Miguel</LeaderInfoTitle>
-                            <img src="icons/firstplace-icon.svg"/>
-                            <LeaderInfoScoreContainer>
-                                <img src="icons/wallet-golden-icon.svg" />
-                                <LeaderInfoScoreTitle variant="h3" color="#FFD400">180</LeaderInfoScoreTitle>
-                            </LeaderInfoScoreContainer>
-                        </LeaderInfoBanner>
-                        <LeaderInfoBanner>
-                            <LeaderInfoTitle variant="h3">Bianca</LeaderInfoTitle>
-                            <img src="icons/thirdplace-icon.svg"/><LeaderInfoScoreContainer>
-                                <img src="icons/wallet-bronze-icon.svg" />
-                                <LeaderInfoScoreTitle variant="h3" color="#FA9547">140</LeaderInfoScoreTitle>
-                            </LeaderInfoScoreContainer>
-                        </LeaderInfoBanner>
-                    </LeaderInfoDetails>
+                    
+                    {renderTopThree()}
+                    
                     <LeaderInfoTable>
-                        <LeaderInfoTableRow>
-                            <LeaderInfoTableHeader>RA</LeaderInfoTableHeader>
-                            <LeaderInfoTableHeader>Nome</LeaderInfoTableHeader>
-                            <LeaderInfoTableHeader>Turma</LeaderInfoTableHeader>
-                            <LeaderInfoTableHeader>Pontos</LeaderInfoTableHeader>
-                        </LeaderInfoTableRow>
-                        <LeaderInfoTableRow>
-                            <LeaderInfoTableData>RA</LeaderInfoTableData>
-                            <LeaderInfoTableData>Nome</LeaderInfoTableData>
-                            <LeaderInfoTableData>Turma</LeaderInfoTableData>
-                            <LeaderInfoTableData>Pontos</LeaderInfoTableData>
-                        </LeaderInfoTableRow>
-                        <LeaderInfoTableRow>
-                            <LeaderInfoTableData>RA</LeaderInfoTableData>
-                            <LeaderInfoTableData>Nome</LeaderInfoTableData>
-                            <LeaderInfoTableData>Turma</LeaderInfoTableData>
-                            <LeaderInfoTableData>Pontos</LeaderInfoTableData>
-                        </LeaderInfoTableRow>
-                        <LeaderInfoTableRow>
-                            <LeaderInfoTableData>RA</LeaderInfoTableData>
-                            <LeaderInfoTableData>Nome</LeaderInfoTableData>
-                            <LeaderInfoTableData>Turma</LeaderInfoTableData>
-                            <LeaderInfoTableData>Pontos</LeaderInfoTableData>
-                        </LeaderInfoTableRow>
-                        <LeaderInfoTableRow>
-                            <LeaderInfoTableData>RA</LeaderInfoTableData>
-                            <LeaderInfoTableData>Nome</LeaderInfoTableData>
-                            <LeaderInfoTableData>Turma</LeaderInfoTableData>
-                            <LeaderInfoTableData>Pontos</LeaderInfoTableData>
-                        </LeaderInfoTableRow>
-                        <LeaderInfoTableRow>
-                            <LeaderInfoTableData>RA</LeaderInfoTableData>
-                            <LeaderInfoTableData>Nome</LeaderInfoTableData>
-                            <LeaderInfoTableData>Turma</LeaderInfoTableData>
-                            <LeaderInfoTableData>Pontos</LeaderInfoTableData>
-                        </LeaderInfoTableRow>
+                        <thead>
+                            <LeaderInfoTableRow>
+                                <LeaderInfoTableHeader>RA</LeaderInfoTableHeader>
+                                <LeaderInfoTableHeader>Nome</LeaderInfoTableHeader>
+                                <LeaderInfoTableHeader>Turma</LeaderInfoTableHeader>
+                                <LeaderInfoTableHeader>Pontos</LeaderInfoTableHeader>
+                            </LeaderInfoTableRow>
+                        </thead>
+                        <tbody>
+                            {topUsers.map((user) => (
+                                <LeaderInfoTableRow key={user.id}>
+                                    <LeaderInfoTableData>{user.ra}</LeaderInfoTableData>
+                                    <LeaderInfoTableData>{user.nome}</LeaderInfoTableData>
+                                    <LeaderInfoTableData>{user.turma}</LeaderInfoTableData>
+                                    <LeaderInfoTableData>{user.pontosAtuais}</LeaderInfoTableData>
+                                </LeaderInfoTableRow>
+                            ))}
+                        </tbody>
                     </LeaderInfoTable>
                 </LeaderInfoContainer>
             </Container>
         </>
     );
 }
+
 
 const Container = styled.div`
     padding: 64px 32px;
