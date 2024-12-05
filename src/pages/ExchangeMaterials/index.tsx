@@ -48,10 +48,18 @@ function ExchangeMaterialsPage() {
     let pesoAtual = await getPeso();
     console.log(pesoAtual);
     console.log(typeof pesoAtual);
+    setPesoMaterial(pesoAtual);
   }
+  
   useEffect(() => {
+    const interval = setInterval(() => {
+      retornarPeso();
+    }, 5000);
+
     retornarPeso();
-  }, [])
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
