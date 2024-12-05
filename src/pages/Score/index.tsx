@@ -119,6 +119,9 @@ const Container = styled.div`
 
 const ScoreHeader = styled.div`
     display: flex;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 2em;
     margin: 0px 0px 1em  0px;
