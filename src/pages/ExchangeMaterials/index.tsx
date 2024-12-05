@@ -126,9 +126,7 @@ function ExchangeMaterialsPage() {
 
                   <ConfirmationMainInfo>
                     <span>
-                      {
-                        materialScores.find((m) => m.type === confirmedMaterial.type)?.weight
-                      }
+                      {pesoMaterial}
                       g
                     </span>
                   </ConfirmationMainInfo>
@@ -142,9 +140,7 @@ function ExchangeMaterialsPage() {
                   <ConfirmationMainInfo>
                     <span>
                       <img src="icons/points-icon.svg" alt="" />
-                      {
-                        materialScores.find((m) => m.type === confirmedMaterial.type)?.score
-                      }
+                      {(pesoMaterial/10).toFixed()}
                     </span>
                   </ConfirmationMainInfo>
                 </ConfirmationInfo>
