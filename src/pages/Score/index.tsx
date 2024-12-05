@@ -54,8 +54,12 @@ function ScorePage() {
                 <ScoreHeader>
                     <img src="icons/search-page-icon.svg" />
                     <div id='header-text'>
-                        <ScoreHeaderTitle variant="h1">Consulta de Pontos</ScoreHeaderTitle>
-                        <ScoreHeaderSubtitle variant="h4">Descubra a pontuação dos seus amigos!</ScoreHeaderSubtitle>
+                        <ScoreHeaderTitle variant="h4">
+                            Consulta de Pontos
+                        </ScoreHeaderTitle>
+                        <ScoreHeaderSubtitle variant="h6">
+                            Descubra a pontuação dos seus amigos!
+                        </ScoreHeaderSubtitle>
                     </div>
                 </ScoreHeader>
                 <ScoreSearchContainer>
@@ -107,10 +111,10 @@ function ScorePage() {
 }
 
 const Container = styled.div`
-    background-color: #f3f2f2;
-    width: 100vw;
-    padding: 64px 32px;
-    height: 100dvh;
+  padding: 120px 320px 0 320px;
+  height: 100vh;
+  width: 100vw;
+  background-color: #F3F2F2;
 `;
 
 const ScoreHeader = styled.div`
@@ -118,14 +122,15 @@ const ScoreHeader = styled.div`
     align-items: center;
     gap: 2em;
     margin: 0px 0px 1em  0px;
+    overflow: hidden;
+
     && img {
-        width: 150px;
-        margin-bottom: -16px;
+        width: 80px;
   }
 `;
 
 const ScoreHeaderTitle = styled(Typography)`
-    font-size: 5rem !important;
+    overflow: hidden;
 `;
 
 const ScoreHeaderSubtitle = styled(Typography)`
@@ -138,14 +143,14 @@ const ScoreSearchContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 30px;
-    margin: 4em 0 2em 0;
+    margin: 2em 0 2em 0;
 `;
 
 const ScoreSearchSelect = styled.select`
     font-family: 'Poppins', sans-serif;
     width: 30%;
-    height: 80px;
-    font-size: 22px;
+    height: 50px;
+    font-size: 16px;
     padding: 10px 20px;
     border-radius: 15px;
     border: none;
@@ -156,30 +161,36 @@ const ScoreSearchInputContainer = styled.div`
     display: flex;
     align-items: center;
     width: 70%;
+    height: 50px;
     border-radius: 15px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     
     && img {
         width: 50px;
     }
-`;
+    `;
 
 const ScoreSearchInput = styled.input`  
     font-family: 'Poppins', sans-serif;  
-    font-size: 30px;
-    height: 80px;
+    font-size: 16px;
+    height: 100%;
     width: 100%;
     padding: 10px 20px;
     border: none;
     border-radius: 15px 0 0 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
 `;
 
 const ScoreSearchButton = styled.button`
     background-color: #18DBB1;
     padding: 10px 20px;
-    height: 80px;
     border: none;
     border-radius: 0 15px 15px 0;
+
+    && img {
+        width: 40px;
+        margin-left: -8px;
+    }
 `;
 
 const LeaderInfoTable = styled.table`
