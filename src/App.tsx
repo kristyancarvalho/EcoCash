@@ -12,6 +12,7 @@ import ExchangeMaterialsPage from "./pages/ExchangeMaterials";
 import VirtualWalletPage from "./pages/VirtualWallet";
 
 import ScorePage from "@/pages/Score"
+import LeaderBoard from "./pages/Leaderboard";
 
 function LoginRedirect() {
   const { currentUser } = useAuth();
@@ -53,11 +54,29 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
+          <Route 
+            path="/leaderboard" 
+            element={
+              <ProtectedRoute>
+                <LeaderBoard />
+              </ProtectedRoute>
+            } 
+          />
+
+          <Route 
+            path="/score" 
+            element={
+              <ProtectedRoute>
+                <ScorePage />
+              </ProtectedRoute>
+            } 
+          />
+          
           <Route path="/login" element={<LoginRedirect />} />
           <Route path="/cadastro" element={<RegistrationPage />} />
           <Route path="/redefinir-senha" element={<ForgotPasswordPage />} />
 
-          <Route path="/score" element={<ScorePage />} />
         </Routes>
       </Router>
       </ThemeProvider>

@@ -35,7 +35,7 @@ function NavigationBar() {
                 <Link to="/carteira">
                     <Icon src="icons/wallet-icon.svg"/>
                 </Link>
-                <Link to="/">
+                <Link to="/leaderboard">
                     <Icon src="icons/leaderboard-icon.svg"/>
                 </Link>
                 <Link to="/score">
