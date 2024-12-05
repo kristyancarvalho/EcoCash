@@ -16,10 +16,10 @@ function ExchangeMaterialsPage() {
   const [pesoMaterial, setPesoMaterial] = useState(0);
 
   const materialTypes: MaterialType[] = [
-    { type: "Papel", color: "#FFD400", icon: "icons/exchange-icon.svg" },
+    { type: "Papel", color: "#0055FF", icon: "icons/exchange-icon.svg" },
     { type: "Plástico", color: "#FF3C36", icon: "icons/exchange-icon.svg" },
-    { type: "Metal", color: "#1ADB72", icon: "icons/exchange-icon.svg" },
-    { type: "Vidro", color: "#0055FF", icon: "icons/exchange-icon.svg" },
+    { type: "Metal", color: "#FFD400", icon: "icons/exchange-icon.svg" },
+    { type: "Vidro", color: "#1ADB72", icon: "icons/exchange-icon.svg" },
   ];
 
   const materialScores = [
