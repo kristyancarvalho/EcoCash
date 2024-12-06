@@ -210,7 +210,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     width: 50%;
   }
   && form > img {
@@ -221,19 +221,18 @@ const Container = styled.div`
 const Title = styled.h1`
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 35px;
-  margin-top: 24px;
+  font-size: 22px;
+  margin-top: 12px;
 `;
 
 const Input = styled(TextField)`
   && {
     width: 100%;
-    font-size: 2rem;
+    font-size: 18px;
     font-family: 'Poppins', sans-serif;
   }
   
   & .MuiOutlinedInput-root {
-    height: 75px;
     background: #F3F2F2;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -243,7 +242,7 @@ const Input = styled(TextField)`
   & .MuiOutlinedInput-input {
     padding: 0;
     color: #000;
-    font-size: 2rem;
+    font-size: 18px;
   }
 
   & .MuiOutlinedInput-notchedOutline {
@@ -269,10 +268,10 @@ const StyledButton = styled(Button)`
   && {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 35px;
+    font-size: 18px;
     text-transform: capitalize;
     padding: 8px 24px;
-    margin-top: 24px;
+    margin-top: 12px;
     width: 100%;
     background: #1ADB72;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
@@ -286,7 +285,7 @@ const ActionLinks = styled.div`
   gap: 16px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 16px;
 `;
 

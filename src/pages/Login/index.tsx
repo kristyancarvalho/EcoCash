@@ -137,19 +137,18 @@ const Container = styled.div`
 const Title = styled.h1`
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  font-size: 35px;
+  font-size: 22px;
   margin-top: 24px;
 `;
 
 const Input = styled(TextField)`
   && {
     width: 100%;
-    font-size: 2rem;
+    font-size: 18px;
     font-family: 'Poppins', sans-serif;
   }
   
   & .MuiOutlinedInput-root {
-    height: 75px;
     background: #F3F2F2;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -159,7 +158,7 @@ const Input = styled(TextField)`
   & .MuiOutlinedInput-input {
     padding: 0;
     color: #000;
-    font-size: 2rem;
+    font-size: 22px;
   }
 
   & .MuiOutlinedInput-notchedOutline {
@@ -179,9 +178,9 @@ const StyledButton = styled(Button)`
   && {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 35px;
+    font-size: 22px;
     text-transform: capitalize;
-    padding: 8px 24px;
+    padding: 8px 12px;
     margin-top: 24px;
     width: 100%;
     background: #1ADB72;

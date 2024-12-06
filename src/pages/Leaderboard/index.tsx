@@ -86,7 +86,7 @@ function LeaderBoard() {
                         <img src='icons/leaderboard-page-icon.svg' />
                         <div id='header-text'>
                             <LeaderInfoHeaderTitle variant="h4">LeaderBoard</LeaderInfoHeaderTitle>
-                            <LeaderInfoHeaderSubtitle variant="h6">Descubra as 8 melhores colocações!</LeaderInfoHeaderSubtitle>
+                            <LeaderInfoHeaderSubtitle variant="h6">Descubra as 7 melhores colocações!</LeaderInfoHeaderSubtitle>
                         </div>
                     </LeaderInfoHeader>
                 <LeaderInfoContainer>
@@ -170,6 +170,7 @@ const LeaderInfoDetails = styled.div`
     }
     display: flex;
     width: 60%;
+    height: fit-content;
     justify-content: space-between;
     background-color: #FFF;
     border-radius: 15px;
@@ -187,9 +188,9 @@ const LeaderInfoBanner = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    padding: 5px 15px;
-    max-height: 100%;
-    width: 30%;
+    padding: 5px;
+    height: 55dvh;
+    width: 40%;
 
     && #leader-medal {
         width: 90px;
@@ -198,6 +199,10 @@ const LeaderInfoBanner = styled.div`
 
 const LeaderInfoTitle = styled(Typography)`
     color: #FFF;
+    font-size: 16px;
+    max-height: 2em;
+    text-align: center;
+    overflow-y: hidden;
 `;
 
 const LeaderInfoScoreContainer = styled.div`
@@ -218,8 +223,8 @@ const LeaderInfoScoreTitle = styled(Typography)`
 
 const LeaderInfoTable = styled.table`
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    width: 25%;
+    font-size: 14px;
+    width: 30%;
     text-align: justify;
     border-collapse: separate;
     border-spacing: 0 15px;
