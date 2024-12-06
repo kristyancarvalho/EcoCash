@@ -184,6 +184,7 @@ const Card = styled.div`
   display: flex;
   height: 62dvh;
   align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
   margin-top: 10px;
   border-radius: 16px;
@@ -290,22 +291,23 @@ const ConfirmButton = styled(Button)`
 `
 
 const ConfirmButtonTitle = styled.span`
-  font-size: 16px;
+  font-size: 18px;
 `
 
 const ConfirmationCard = styled.div`
   background: #ffffff;
   display: flex;
+  justify-content: center;
+  gap: 2em;
   border-radius: 16px;
   text-align: center;
-  gap: 20px;
   flex-direction: column;
   align-items: center;
 `;
 
 const ConfirmationTitle = styled.span`
   font-family: 'Poppins', sans-serif;
-  font-size:  18px;
+  font-size:  22px;
   font-weight: 600;
 `;
 
@@ -314,10 +316,8 @@ const ConfirmationBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   && img {
-    width: 70px;
-    margin: 16px 0;
+    width: 124px;
   }
 `;
 
