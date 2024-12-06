@@ -14,7 +14,7 @@ function LeaderBoard() {
         const fetchTopUsers = async () => {
             try {
                 const usersRef = collection(db, 'users');
-                const q = query(usersRef, orderBy('pontosAtuais', 'desc'), limit(8));
+                const q = query(usersRef, orderBy('pontosAtuais', 'desc'), limit(7));
                 
                 const querySnapshot = await getDocs(q);
                 const users = querySnapshot.docs.map(doc => ({
