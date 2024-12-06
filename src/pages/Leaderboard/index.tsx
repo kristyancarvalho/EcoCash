@@ -121,8 +121,10 @@ function LeaderBoard() {
 
 
 const Container = styled.div`
-    padding: 128px 32px;
+    padding: 128px 300px 0px 300px;
     width: 100vw;
+    align-items: center;
+    justify-content: center;
     background-color: #f3f2f2;
     height: 100dvh;
     `;
@@ -130,24 +132,30 @@ const Container = styled.div`
 const LeaderInfoContainer = styled.div`
     display: flex;
     height: auto;
-    gap: 2em;
+    gap: 15px;
 `;
 
 const LeaderInfoHeader = styled.div`
     display: flex;
+    width: 100%;
     align-items: center;
-    padding: 0 320px;
     margin: 0px 0px 1em  0px;
     && img {
-        width: 40px;
-        margin-bottom: -16px;
+        width: 6em;
   }`;
 
-const LeaderInfoHeaderTitle = styled(Typography)``;
+const LeaderInfoHeaderTitle = styled(Typography)`
+  font-weight: bold;
+  overflow-y: hidden;
+  font-size: 16px;
+`;
 
 const LeaderInfoHeaderSubtitle = styled(Typography)`
-    color: #ACACAC;
-    font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  width: 100%;
+  overflow: hidden;
+  color: #ACACAC;
+  font-family: 'Poppins', sans-serif;
 `;
 
 const LeaderInfoDetails = styled.div`
@@ -161,12 +169,13 @@ const LeaderInfoDetails = styled.div`
         background-color: #FA9547;
     }
     display: flex;
+    width: 60%;
     justify-content: space-between;
     background-color: #FFF;
     border-radius: 15px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    gap: 20px;
+    padding: 10px;
+    gap: 5%;
 
     && img {
         background-color: transparent;
@@ -180,7 +189,7 @@ const LeaderInfoBanner = styled.div`
     justify-content: space-evenly;
     padding: 5px 15px;
     max-height: 100%;
-    width: 300px;
+    width: 30%;
 
     && #leader-medal {
         width: 90px;
@@ -197,19 +206,20 @@ const LeaderInfoScoreContainer = styled.div`
     background-color: #FFF;
     border-radius: 15px;
     gap: 15px;
-    padding: 8px;
-
+    padding: 5px;
     && img {
         width: 40px;
     }
 `;
 
-const LeaderInfoScoreTitle = styled(Typography)``;
+const LeaderInfoScoreTitle = styled(Typography)`
+  font-size: 14px;
+`;
 
 const LeaderInfoTable = styled.table`
     font-family: 'Poppins', sans-serif;
-    font-size: 22px;
-    width: 100%;
+    font-size: 16px;
+    width: 25%;
     text-align: justify;
     border-collapse: separate;
     border-spacing: 0 15px;
@@ -217,7 +227,8 @@ const LeaderInfoTable = styled.table`
 
 const LeaderInfoTableHeader = styled.th`
     background-color: #18DBB1;
-    padding: 10px;
+    text-align: center;
+    padding: 15px;
     font-weight: 200;
     color: #FFF;
 `;
@@ -229,7 +240,8 @@ const LeaderInfoTableRow = styled.tr`
 
 const LeaderInfoTableData = styled.td`
     width: 25%;
-    padding: 5px;
+    text-align: center;
+    padding: 10px;
 `;
 
 export default LeaderBoard;
