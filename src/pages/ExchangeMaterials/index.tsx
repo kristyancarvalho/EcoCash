@@ -46,7 +46,9 @@ function ExchangeMaterialsPage() {
   const handleBack = () => {
     setSelectedMaterial(null);
     setConfirmedMaterial(null);
+    setIsPointsEarned(false);
   };
+  
 
   async function retornarPeso() {
     const pesoAtual = await getPeso();
