@@ -3,6 +3,8 @@ import styled from "styled-components";
 import NavigationBar from "@/components/NavigationBar";
 import { Button, Typography } from "@mui/material";
 import { getPeso } from "@/api/arduino";
+import { incrementPoints } from "@/firebase/firestore";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface MaterialType {
   type: string;
@@ -11,9 +13,11 @@ interface MaterialType {
 }
 
 function ExchangeMaterialsPage() {
+  const { currentUser } = useAuth();
   const [selectedMaterial, setSelectedMaterial] = useState<MaterialType | null>(null);
   const [confirmedMaterial, setConfirmedMaterial] = useState<MaterialType | null>(null);
   const [pesoMaterial, setPesoMaterial] = useState(0);
+  const [isPointsEarned, setIsPointsEarned] = useState(false);
 
   const materialTypes: MaterialType[] = [
     { type: "Papel", color: "#0055FF", icon: "icons/exchange-icon.svg" },
@@ -45,7 +49,7 @@ function ExchangeMaterialsPage() {
   };
 
   async function retornarPeso() {
-    let pesoAtual = await getPeso();
+    const pesoAtual = await getPeso();
     console.log(pesoAtual);
     console.log(typeof pesoAtual);
     setPesoMaterial(pesoAtual);
@@ -60,6 +64,27 @@ function ExchangeMaterialsPage() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleEarnPoints = async () => {
+    if (!currentUser) {
+      alert("Por favor, faça login primeiro.");
+      return;
+    }
+
+    try {
+      const pointsToEarn = Math.floor(pesoMaterial / 10);
+
+      await incrementPoints(currentUser.uid, pointsToEarn);
+
+      setIsPointsEarned(true);
+
+      alert(`Você ganhou ${pointsToEarn} pontos!`);
+    } catch (error) {
+      console.error("Erro ao ganhar pontos:", error);
+      alert("Não foi possível ganhar pontos. Tente novamente.");
+    }
+  };
+
 
   return (
     <>
@@ -153,7 +178,10 @@ function ExchangeMaterialsPage() {
                   Voltar
                 </ConfirmButtonTitle>
               </BackButton>
-              <EarnPointsButton>
+              <EarnPointsButton 
+                onClick={handleEarnPoints}
+                disabled={isPointsEarned}
+              >
                 <ConfirmButtonTitle>
                   Adquirir Pontos
                 </ConfirmButtonTitle>
