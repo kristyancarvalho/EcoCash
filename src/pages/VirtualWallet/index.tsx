@@ -1,12 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavigationBar from '@/components/NavigationBar';
 import { Button, TextField, Typography } from '@mui/material';
+import { useAuth } from '@/contexts/AuthContext';
+import { getUserById } from '@/firebase/firestore';
 
 function VirtualWalletPage() {
+  const { currentUser } = useAuth();
+  const [userPoints, setUserPoints] = useState(0);
   const [points, setPoints] = useState('');
   const [redeemValue, setRedeemValue] = useState('');
   const [isRedeemed, setIsRedeemed] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserPoints = async () => {
+      if (currentUser) {
+        try {
+          setLoading(true);
+          const userData = await getUserById(currentUser.uid);
+          if (userData) {
+            setUserPoints(userData.pontosAtuais || 0);
+          }
+        } catch (error) {
+          console.error('Erro ao buscar pontos do usuário:', error);
+          setUserPoints(0);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUserPoints();
+  }, [currentUser]);
 
   const handlePointsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.replace(/[^\d]/g, '');
@@ -17,8 +43,11 @@ function VirtualWalletPage() {
   };
 
   const handleRedeem = () => {
-    if (points && parseInt(points) > 0) {
+    const pointsToRedeem = parseInt(points);
+    if (pointsToRedeem > 0 && pointsToRedeem <= userPoints) {
       setIsRedeemed(true);
+    } else {
+      alert('Pontos inválidos ou insuficientes.');
     }
   };
 
@@ -55,7 +84,7 @@ function VirtualWalletPage() {
               <BalanceInfo>
                 <img src="icons/points-icon.svg" alt="saldo" />
                 <BalanceNumber>
-                  180
+                  {loading ? 'Carregando...' : userPoints}
                 </BalanceNumber>
               </BalanceInfo>
               
@@ -85,9 +114,9 @@ function VirtualWalletPage() {
                 </div>
                 <ConfirmButton 
                   onClick={handleRedeem}
-                  disabled={!points || parseInt(points) === 0}
+                  disabled={!points || parseInt(points) === 0 || parseInt(points) > userPoints}
                   style={{
-                    backgroundColor: points && parseInt(points) > 0 ? "#18DBB1" : "#ACACAC",
+                    backgroundColor: points && parseInt(points) > 0 && parseInt(points) <= userPoints ? "#18DBB1" : "#ACACAC",
                   }}
                 >
                   <ConfirmButtonTitle>Resgatar</ConfirmButtonTitle>
