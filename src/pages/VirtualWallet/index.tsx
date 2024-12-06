@@ -165,7 +165,6 @@ const InfoHeader = styled.div`
   align-items: center;
   gap: 20px;
   font-family: 'Poppins', sans-serif; 
-  
   && img {
     width: 80px;
   }
@@ -183,12 +182,13 @@ const InfoHeaderSubtitle = styled(Typography)`
 
 const Card = styled.div`
   display: flex;
+  height: 62dvh;
   align-items: center;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 10px;
   border-radius: 16px;
   width: 100%;
-  padding: 32px;
+  padding: 10px;
   background: #FFFFFF;
 `
 
@@ -208,10 +208,9 @@ const BalanceInfo = styled.div`
 
 const BalanceNumber = styled.span`
   font-family: 'Poppins', sans-serif;
-  font-size: 2.5rem;
+  font-size: 22px;
   font-weight: 500;
-  
-  margin: 16px 0;
+  margin: 12px 0;
 `
 
 const RedeemPoints = styled.div`
@@ -219,13 +218,13 @@ const RedeemPoints = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 
   && div {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 10px;
   }
 `
 
@@ -248,7 +247,7 @@ const Input = styled(TextField)`
   & .MuiOutlinedInput-input {
     padding: 0;
     color: #000;
-    font-size: 1rem;
+    font-size: 18px;
   }
 
   & .MuiOutlinedInput-notchedOutline {
@@ -278,7 +277,8 @@ const CalculatedValueDisplay = styled.div`
 
 const ConfirmButton = styled(Button)`
     && {
-      margin-top: 24px;
+      font-size: 18px;
+      margin-top: 12px;
       width: 100%;
       background-color: #18DBB1;
       border-radius: 16px;
@@ -290,21 +290,22 @@ const ConfirmButton = styled(Button)`
 `
 
 const ConfirmButtonTitle = styled.span`
-  font-size: 1rem;
+  font-size: 16px;
 `
 
 const ConfirmationCard = styled.div`
   background: #ffffff;
+  display: flex;
   border-radius: 16px;
   text-align: center;
-  display: flex;
+  gap: 20px;
   flex-direction: column;
   align-items: center;
 `;
 
 const ConfirmationTitle = styled.span`
   font-family: 'Poppins', sans-serif;
-  font-size:  1.5rem;
+  font-size:  18px;
   font-weight: 600;
 `;
 
