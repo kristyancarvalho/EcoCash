@@ -219,7 +219,7 @@ const LeaderInfoTableRow = styled.tr`
 
 const LeaderInfoTableData = styled.td`
     width: 25%;
-    padding: 5px;
+    padding: 5px 16px;
 `;
 
 export default ScorePage;
